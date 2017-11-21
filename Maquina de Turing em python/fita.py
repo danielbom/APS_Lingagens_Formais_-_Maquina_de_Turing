@@ -6,7 +6,8 @@ class fita(object):
         self.posFita = 0
         for letra in entrada:
             self.F.append(letra)
-
+            
+    # Funcoes auxiliares e de debug
     def Desloque_a_Direita(self):
         if self.limite == len(self.F):
             print("Limite da fita alcancado!")
@@ -24,11 +25,12 @@ class fita(object):
             self.F.insert(0, "")
     def imprimeFita(self):
         print(self.F)
-    def getSimbulo(self):
-        return self.F[self.posFita]
     def getTam(self):
         return len(self.F)
 
+    # Funções úteis
+    def getSimbulo(self):
+        return self.F[self.posFita]
     def setSimbulo(self, letra):
         if type(letra) == type(""):
             self.F[self.posFita] = letra
