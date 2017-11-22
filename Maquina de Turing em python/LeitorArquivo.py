@@ -8,8 +8,9 @@
 class LeitorArquivo(object):
     def __init__(self, nomeArq):
         self.arq = open("{}".format(nomeArq), "r")
-        self.buffer = self.arq.read()
-        linhas = self.buffer.splitlines()
+        buff = self.arq.read()
+        linhas = buff.splitlines()
+        print(linhas)
 
         self.AlfabetoEntrada = linhas[0]
         self.AlfabetoFita = linhas[1]
