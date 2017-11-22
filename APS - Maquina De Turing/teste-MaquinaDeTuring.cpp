@@ -7,14 +7,18 @@ int main() {
     //MT.Adicionar_Transicao(Atual , Condicao , Alter , Prox , Direcao);
     MT.Adicionar_Transicao("q0" , "#" , "#" , "q0" , Direita);
     MT.Adicionar_Transicao("q0" , "a" , "#" , "q1" , Direita);
+
     MT.Adicionar_Transicao("q1" , "#" , "#" , "q1" , Direita);
     MT.Adicionar_Transicao("q1" , "a" , "a" , "q3" , Direita);
     MT.Adicionar_Transicao("q1" , "" , "" , "q2" , Esquerda);
+
     MT.Adicionar_Transicao("q3" , "#" , "#" , "q3" , Direita);
     MT.Adicionar_Transicao("q3" , "a" , "#" , "q4" , Direita);
     MT.Adicionar_Transicao("q3" , "" , "" , "q5" , Esquerda);
+
     MT.Adicionar_Transicao("q4" , "#" , "#" , "q4" , Direita);
     MT.Adicionar_Transicao("q4" , "a" , "a" , "q3" , Direita);
+
     MT.Adicionar_Transicao("q5" , "a" , "a" , "q5" , Esquerda);
     MT.Adicionar_Transicao("q5" , "#" , "#" , "q5" , Esquerda);
     MT.Adicionar_Transicao("q5" , "" , "" , "q0" , Direita);
