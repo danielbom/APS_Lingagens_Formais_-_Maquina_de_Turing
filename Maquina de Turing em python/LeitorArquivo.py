@@ -10,7 +10,6 @@ class LeitorArquivo(object):
         self.arq = open("{}".format(nomeArq), "r")
         buff = self.arq.read()
         linhas = buff.splitlines()
-        print(linhas)
 
         self.AlfabetoEntrada = linhas[0]
         self.AlfabetoFita = linhas[1]
