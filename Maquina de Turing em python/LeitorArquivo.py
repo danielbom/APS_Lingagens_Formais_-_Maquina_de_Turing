@@ -22,7 +22,10 @@ class LeitorArquivo(object):
         for t in transicoes:
             self.Transicoes.append(t.split(" "))
 
-        self.QuantidadeDeFitas = 1
+        transicoes = linhas[5]
+
+        # Necessita testes
+        self.QuantidadeDeFitas = (len(transi��es)-2) / 3
 
     def getAlfabetoEntrada(self):
         return self.AlfabetoEntrada
@@ -42,8 +45,7 @@ class LeitorArquivo(object):
     def getTransicoes(self):
         return self.Transicoes
 
-    # Não tenho certeza se é possível definir a quantidade de fitas pelas transições
-    # Talvez deva ser um parametro inicial informado pelo usuário
+    # Necessita testes
     def getQuantidadeDeFitas(self):
         return self.QuantidadeDeFitas
 
