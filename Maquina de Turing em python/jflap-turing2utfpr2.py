@@ -34,19 +34,19 @@ class Jflap2Utfpr(object):
 		self.initialState = None
 		self.finalStates = set()
 		self.transitions = set()
+		self.singleTape = False
 
 	def convert(self, inputFile, outputFile, blankSymbol = 'B', alphabet = None):
-		if alphabet is None:
-			self.alphabet = self.tapeSymbols
-		else:
-			self.alphabet = alphabet
-
 		self.blankSymbol = blankSymbol
-		self.tapeSymbols.add(blankSymbol)
+		self.tapeSymbols.add(self.blankSymbol)
 
 		xmldoc = ET.parse(inputFile)
 		root = xmldoc.getroot()
-		self.tapes = int(root.find('tapes').text)
+		if root.find('tapes') == None:
+			self.singleTape = True
+			self.tapes = 1
+		else:
+			self.tapes = int(root.find('tapes').text)
 
 		tm = root.find('automaton')
 		for s in tm.findall('block'):
@@ -62,8 +62,24 @@ class Jflap2Utfpr(object):
 			self.transitions.add(transition)
 			transition.currentState = t.find('from').text
 			transition.newState = t.find('to').text
-			for i in range(1, self.tapes+1):
-				movement = TapeMovement()
+			if self.singleTape:
+ 	      			movement = TapeMovement()
+ 	      			transition.tapeMovements.append(movement)
+ 	      			movement.tape = 1
+ 	      			if t.find("read").text is not None:
+                                        movement.currentTapeSymbol = t.find("read").text
+                                        self.tapeSymbols.add(movement.currentTapeSymbol)
+                                else:
+                                        movement.currentTapeSymbol = blankSymbol
+                                if t.find("write").text is not None:
+                                        movement.newTapeSymbol = t.find("write").text
+                                        self.tapeSymbols.add(movement.newTapeSymbol)
+				else:
+					movement.newTapeSymbol = blankSymbol
+				movement.headDirection = t.find("move").text
+                        else:
+		    	    for i in range(1, self.tapes+1):
+            			movement = TapeMovement()
 				transition.tapeMovements.append(movement)
 				movement.tape = i
 				if t.find("read[@tape='" + str(i) + "']").text is not None:
@@ -77,6 +93,12 @@ class Jflap2Utfpr(object):
 				else:
 					movement.newTapeSymbol = blankSymbol
 				movement.headDirection = t.find("move[@tape='" + str(i) + "']").text
+
+		if alphabet is None:
+			self.alphabet = self.tapeSymbols.copy()
+			self.alphabet.remove(self.blankSymbol)
+		else:
+			self.alphabet = alphabet
 		
 		with open(outputFile, 'wb') as csvfile:
 			writer = csv.writer(csvfile, delimiter=' ')
@@ -100,7 +122,7 @@ class Jflap2Utfpr(object):
 
 if __name__ == "__main__":
 	if len(sys.argv) != 3:
-		print ("Parametros insuficientes. Informe o nome de arquivo de entrada e o nome do arquivo de saida")
+		print "Parametros insuficientes. Informe o nome de arquivo de entrada e o nome do arquivo de saida"
 		sys.exit(1)
 	converter = Jflap2Utfpr()
 	converter.convert(sys.argv[1], sys.argv[2])

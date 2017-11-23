@@ -62,7 +62,7 @@ class MaquinaDeTuring(object):
 
 
 # testes e debug
-'''
+
 m = MaquinaDeTuring()
 m.addTransicao("0", "0", "#", "#", "D")
 m.addTransicao("0", "1", "a", "#", "D")
@@ -87,5 +87,8 @@ m.DefinirEstadoInicial("0")
 m.addEstadoFinal("2")
 
 print(m.executar())
-'''
+m.DefinirEntrada("aa")
+print(m.executar())
+m.DefinirEntrada("aaa")
+print(m.executar())
 # fim debug
