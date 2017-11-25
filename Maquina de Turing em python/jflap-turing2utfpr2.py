@@ -5,6 +5,7 @@
 #    Linha 3: simbolo que representa um espaco em branco na fita
 #    Linha 4: estado inicial
 #    Linha 5, coloquem uma linha indicando o conjunto de estados de aceitacao
+#### Linha 6: quantidade de fitas #### Editado
 #    Linhas 6 em diante: transicoes, uma por linha, no formato estado atual, simbolo atual,  novo estado, novo simbolo, direcao para mover a cabeca
 
 from xml.etree import ElementTree as ET
