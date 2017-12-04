@@ -1,0 +1,48 @@
+Para executar a maquina de turing de n fitas, siga os seguintes passos.
+
+	COMO EXECUTAR A MAQUINA DE TURING
+1.0 - Com um arquivo .jff abra a pasta 'Arquivos'.
+1.1 - Execute o programa em python jflap-turing2utfprv2.py com o Python 2.X no terminal.
+	1.1.1 - Abra o terminal no diretório desta pasta.
+	1.1.1 - Digite o comando:
+			python jflap-turing2utfprv2.py NomeArquivo.jff Saida.txt
+
+2.0 - Copie o arquivo 'Saida.txt' para a pasta 'turing_machine'.
+2.1 - Execute o programa em python main.py com o Python 3.X no terminal.
+	2.1.1 - Abra o terminal no diretorio 'turing_machine'.
+	2.1.2 - Digite o comando:
+			python main.py Saida.txt entrada_fita[1], entrada_fita[2], ... entrada_fita[n]
+
+
+	ALERTAS
+Caso o programa seja iniciado com n fitas e a quantidade de argumentos para as fitas não for iguais, então:
+	Se inputs > argumentos: execução é interrompida
+	Se inputs < argumentos: execução altera apenas a quantidade de fitas especificadas
+	Caso contrário: a execução acontece normalmente
+
+
+	INTERRUPÇÕES
+1 - Caso o programa chegue a 100 iterações, ele gera uma mensagem perguntando se o usuário deseja continuar.
+Caso o usuário digite, 's' ou 'S', o limite de iterações é dobrado e a execução continua.
+Caso contrário, o programa é interrompido, retornando o estado da(s) fita(s) naquele instante, e com resultado 'None'.
+
+2 - O programa é interrompido se a quantidade de argumentos para as fitas for maior que a quantidade de fitas
+
+
+	CLASSES
+O programa consiste nas seguintes classes:
+- LeitorArquivo
+- tape (fita)
+- ntapes (nfita)
+- turing_machine (maquina de turing)
+- fila
+
+A classe main.py instancia a classe LeitorArquivo com o nome do arquivo '.txt' invocado pelo usuário. Está classe é responsável por ler o arquivo e adquirir as informações para a criação da minha maquina de turing.
+
+A classe main.py instancia a classe turing_machine enviando os dados adquiridos pela classe LeitorArquivo.
+
+A classe turing_machine é responsável por instanciar a classe ntapes, pois conhece as especificações dela, adiquiridas no momento da instanciação. A instanciação acontece apenas no momento de execução.
+
+A classe ntapes é responsável por tratar varias fitas, portanto instancia tape.
+
+A classe fila é responsável pelo não determinismo. Ela recebe as transições possíveis e o estado das fitas atuais e então, na hora de executar, reseta as fitas para o estado da sua transição e executa a transição. Ela utiliza o conceito FIFO(first in, first out), primeiro a entrar, primeiro a sair para execução.
