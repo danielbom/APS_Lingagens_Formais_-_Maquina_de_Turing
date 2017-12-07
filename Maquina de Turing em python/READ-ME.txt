@@ -16,8 +16,8 @@ Para executar a maquina de turing de n fitas, siga os seguintes passos.
 
 	ALERTAS
 Caso o programa seja iniciado com n fitas e a quantidade de argumentos para as fitas não for iguais, então:
-	Se inputs > argumentos: execução é interrompida
-	Se inputs < argumentos: execução altera apenas a quantidade de fitas especificadas
+	Se quantidade de fitas < argumentos: execução é interrompida
+	Se quantidade de fitas > argumentos: a execução cria fitas iniciadas apenas com as entradas especificadas
 	Caso contrário: a execução acontece normalmente
 
 
